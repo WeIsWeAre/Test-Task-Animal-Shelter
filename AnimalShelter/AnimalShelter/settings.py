@@ -25,18 +25,26 @@ SECRET_KEY = 'django-insecure-2!-xp89ghuecl&m(=c-=_++rbw^g7djxrqj2()a!5a0=qgvsa#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+INTERNAL_IPS = ('127.0.0.1', 'localhost')
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
+    'animals.apps.AnimalsConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
