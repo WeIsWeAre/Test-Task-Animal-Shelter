@@ -9,6 +9,8 @@ window.eventBus = new Vue()
 export const store = new Vuex.Store({
   state: {
 
+    edit_state: false,
+
     loading: false,
     success_message: "",
     error_message: "",
@@ -19,6 +21,10 @@ export const store = new Vuex.Store({
     api_path: "http://127.0.0.1:8000",
   },
   getters: {
+
+    getStateEdit(state) {
+      return state.edit_state;
+    },
 
     getApiPath(state) {
       return state.api_path;
@@ -46,6 +52,10 @@ export const store = new Vuex.Store({
 
   },
   mutations: {
+
+    changeEditState(state,edit_state) {
+      state.edit_state = edit_state;
+    },
 
     clearMessage(state) {
       state.success_message = "";
@@ -81,6 +91,11 @@ export const store = new Vuex.Store({
 
   },
   actions: {
+
+    
+    changeEditState(context,edit_state) {
+      context.commit('changeEditState',edit_state);
+    },
 
     getDataFromServer(context){
 
