@@ -12,6 +12,8 @@ export const store = new Vuex.Store({
     edit_state: false,
 
     loading: false,
+    changes_loading: false,
+
     success_message: "",
     error_message: "",
 
@@ -42,6 +44,10 @@ export const store = new Vuex.Store({
       return state.loading;
     },
 
+    getChangesLoading(state) {
+      return state.changes_loading;
+    },
+
     getSuccessMessage(state) {
       return state.success_message;
     },
@@ -63,6 +69,10 @@ export const store = new Vuex.Store({
 
     updateLoading(state, data) {
       state.loading = data;
+    },
+
+    updateChangesLoading(state, data) {
+      state.changes_loading = data;
     },
 
     updateError(state, text) {
@@ -143,6 +153,32 @@ export const store = new Vuex.Store({
     updateError(context, text) {
       context.commit('updateError', text)
     },
+
+    deleteRecordsAnimal(context,records_ids){
+      //context.commit('deleteRecordsAnimal', records)
+
+      context.commit('updateChangesLoading',true);
+     
+       axios.post(context.getters.getApiPath + '/api/animals/delete/',{
+        
+        'records_ids': records_ids
+            
+        
+       })
+            .then(() => {
+              
+              // удаляем ненужные по Ids
+              context.commit('updateChangesLoading',false);
+              context.commit('updateError',"");
+            
+
+            })
+            .catch(error => {
+              context.commit('updateError',"Произошла серверная ошибка " + error.response.data.errors);
+              context.commit('updateChangesLoading',false);
+  
+            }) 
+    }
 
   }
 })

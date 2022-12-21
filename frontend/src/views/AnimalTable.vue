@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container-fluid mt-5">
+        <div class="container-lg mt-5">
             <div v-if="loading">
                 <main-loader></main-loader>
             </div>
