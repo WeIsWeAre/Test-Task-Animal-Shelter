@@ -4,18 +4,18 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework import viewsets
 
-class GetAnimals(viewsets.ReadOnlyModelViewSet):
+class GetAnimals(APIView):
 
     def get(self,request):
 
         animals = Animal.objects.all()
-        serialazer = AnimalsListSerializer(animals)
+        serialazer = AnimalsListSerializer(animals,many = True)
         return Response(serialazer.data)
 
-class GetAnimalTypes(viewsets.ReadOnlyModelViewSet):
+class GetAnimalTypes(APIView):
 
     def get(self,request):
 
         animal_types = AnimalType.objects.all()
-        serialazer = AnimalTypesListSerializer(animal_types)
+        serialazer = AnimalTypesListSerializer(animal_types,many = True)
         return Response(serialazer.data)
