@@ -1,51 +1,16 @@
 <template>
     <div>
         <div class="container-fluid mt-5">
-
-            <div class="row">
+            <div v-if="loading">
+                <main-loader></main-loader>
+            </div>
+            <div v-else class="row">
                 <div class="col">
-
-
-                    <div v-if="loading">
-                        <main-loader></main-loader>
-                    </div>
-                    <div v-else>
-
-                        <div class="text-center" v-if="animals.length == 0">
-                            <h5> Список поступивших животных пуст</h5> 
-                        </div>
-                        <div v-else>
-
-                            <h3 class="text-center mb-5"> Поступившие животные </h3>
-
-                            <table class="table table-style table-responsive-md">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">№ п/п</th>
-                                        <th scope="col">Наименование</th>
-                                        <th scope="col">Тип животного</th>
-                                        <th scope="col">Вес</th>
-                                       
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <tr v-for="data in animals" v-bind:key="data.id">
-
-                                        <td>{{ data.id }} </td>
-                                        <td>{{ data.name }} </td>
-                                        <td>{{ data.name_type }} </td>
-                                        <td>{{ data.weight }} </td>
-                                      
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-
+                   <animal-types></animal-types>
+                </div>
+                <div class="col">
+                    <arrive-animals></arrive-animals>
+                    
                 </div>
 
             </div>
@@ -56,6 +21,8 @@
 
 <script>
     import MainHeader from '../components/MainLoader.vue'
+    import ArrivedAnimals from '../components/Table/ArrivedAnimals.vue'
+    import AnImalTypes from '../components/Table/AnImalTypes.vue'
 
     export default {
 
@@ -68,6 +35,8 @@
         },
         components: {
             'main-loader': MainHeader,
+            'arrive-animals': ArrivedAnimals,
+            'animal-types': AnImalTypes,
         },
         methods: {
 
@@ -86,9 +55,10 @@
         },
         created(){
             this.$store.dispatch('getDataFromServer');
+         
         },
         mounted() {
-
+        
 
         }
     }

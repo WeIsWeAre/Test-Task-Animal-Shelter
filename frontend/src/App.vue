@@ -57,12 +57,9 @@
     min-width: 600px;
   }
 
-  .table .thead-light th {
-    background-color: #E3D9D9 !important;
-  }
-
   .table-style>tbody>tr>td {
     word-break: break-all;
+    border-radius: 3px;
   }
 
   .bold {

@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
 
  if(to.fullPath == '/'){
   next({
-    name: 'create',
+    name: 'animals',
   })
  }
  else{
