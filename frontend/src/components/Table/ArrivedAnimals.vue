@@ -58,7 +58,8 @@ export default {
     },
     methods:{
         deleteRecordsAnimal(){
-            this.$store.dispatch('deleteRecordsAnimal',this.animals_delete_ids);
+
+            this.$store.dispatch('deleteRecords',{"ids":this.animals_delete_ids,"path":'/api/animals/delete/',"name_mutation":'deleteAnimals'});
         }
     },
     computed: {

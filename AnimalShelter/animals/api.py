@@ -28,7 +28,6 @@ class DeleteAnimal(APIView):
 
         tupl = ()
         for id in request.data.values():
-            print(id)
             tupl += tuple(id)
            
         animals = Animal.objects.filter(id__in=tupl)
@@ -37,5 +36,19 @@ class DeleteAnimal(APIView):
             animals.delete()
             return Response(status = 200)
         else:
-            return Response(('Invalid delete animal'),status=400)
+            return Response(('Invalid delete animal(s)'),status=400)
        
+class DeleteAnimalType(APIView):
+    def post(self,request):
+
+        tupl = ()
+        for id in request.data.values():
+            tupl += tuple(id)
+           
+        animal_types = AnimalType.objects.filter(id__in=tupl)
+
+        if animal_types:
+            animal_types.delete()
+            return Response(status = 200)
+        else:
+            return Response(('Invalid delete animal type(s)'),status=400)

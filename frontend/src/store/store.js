@@ -59,6 +59,22 @@ export const store = new Vuex.Store({
   },
   mutations: {
 
+    deleteAnimalType (state, records_ids){
+      
+      records_ids.forEach(id => {
+        state.animal_types = state.animal_types.filter(animal_type => animal_type.id !== id)
+      });
+
+    },
+
+    deleteAnimals (state, records_ids){
+      
+      records_ids.forEach(id => {
+        state.animals = state.animals.filter(animal => animal.id !== id)
+      });
+
+    },
+
     changeEditState(state,edit_state) {
       state.edit_state = edit_state;
     },
@@ -95,6 +111,7 @@ export const store = new Vuex.Store({
     
       state.animals.forEach(item => {
         let search_type = state.animal_types.find(animal_type => animal_type.id == item.name_type)
+        search_type.name_type = search_type.name_type ? search_type.name_type :  "Не определен"
         item.name_type = search_type.name_type
       });
     },
@@ -106,7 +123,7 @@ export const store = new Vuex.Store({
     changeEditState(context,edit_state) {
       context.commit('changeEditState',edit_state);
     },
-
+    
     getDataFromServer(context){
 
       context.commit('updateLoading',true);
@@ -154,31 +171,22 @@ export const store = new Vuex.Store({
       context.commit('updateError', text)
     },
 
-    deleteRecordsAnimal(context,records_ids){
-      //context.commit('deleteRecordsAnimal', records)
+    deleteRecords(context,data){
 
       context.commit('updateChangesLoading',true);
-     
-       axios.post(context.getters.getApiPath + '/api/animals/delete/',{
-        
-        'records_ids': records_ids
-            
-        
-       })
-            .then(() => {
-              
-              // удаляем ненужные по Ids
-              context.commit('updateChangesLoading',false);
-              context.commit('updateError',"");
-            
+       axios.post(context.getters.getApiPath + data.path,{'records_ids': data.ids })
+      .then(() => {  
+        context.commit(data.name_mutation, data.ids)
+        context.commit('updateChangesLoading',false);
+        context.commit('updateError',"");
+      })
+      .catch(error => {
+        context.commit('updateError',"Произошла серверная ошибка " + error.response.data.errors);
+        context.commit('updateChangesLoading',false);
 
-            })
-            .catch(error => {
-              context.commit('updateError',"Произошла серверная ошибка " + error.response.data.errors);
-              context.commit('updateChangesLoading',false);
-  
-            }) 
-    }
+      }) 
+    },
+    
 
   }
 })

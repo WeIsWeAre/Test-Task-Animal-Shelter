@@ -14,7 +14,9 @@
                     <tr>
                         <th scope="col">№ п/п</th>
                         <th scope="col">Тип</th>
-                        <th scope="col">*</th>
+                        <th scope="col"> 
+                             <button :disabled="!editState" v-on:click="deleteRecordsAnimalType()" type="button" class="btn btn-danger">Удалить</button>
+                         </th>
 
                     </tr>
                 </thead>
@@ -51,6 +53,12 @@ export default {
         return {
             animal_types_delete_ids: [],
 
+        }
+    },
+    methods:{
+        deleteRecordsAnimalType(){
+
+            this.$store.dispatch('deleteRecords',{"ids":this.animal_types_delete_ids,"path":'/api/animal_types/delete/',"name_mutation":'deleteAnimalType'});
         }
     },
     computed: {
