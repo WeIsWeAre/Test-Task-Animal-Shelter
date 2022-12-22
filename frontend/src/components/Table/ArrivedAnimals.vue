@@ -17,14 +17,17 @@
                         <th scope="col">Наименование</th>
                         <th scope="col">Тип животного</th>
                         <th scope="col">Вес</th>
+                        <th scope="col">Включить в объявление</th>
                         <th scope="col">Изменение записи</th>
-                        <th scope="col"> <button :disabled="isChangeLoadingStateTrue" v-on:click="deleteRecordsAnimal()" type="button" class="btn btn-danger">Удалить</button>
+                        <th scope="col" > <button :disabled="isChangeLoadingStateTrue" v-on:click="deleteRecordsAnimal()" type="button" class="btn btn-danger">Удалить</button>
                         </th>
 
                     </tr>
                 </thead>
                 <tbody>
 
+                   
+               
 
                     <tr v-for="(data,index) in animals" v-bind:key="data.id">
 
@@ -32,6 +35,9 @@
                         <td>{{ data.name }} </td>
                         <td>{{ data.name_type }} </td>
                         <td>{{ data.weight }} </td>
+                        <td> 
+                            <b-form-radio :change="setActiveMissingAnimal()" v-model="includeInReport" :name="'includeInReport'+data.id" :value=data>Включить</b-form-radio> 
+                       </td>
                         <td> <change-block :animal_change="data"></change-block> </td>
                         <td><div class="form-check">
                             <input :value="data.id" v-model="animals_delete_ids" :disabled=isChangeLoadingStateTrue
@@ -59,6 +65,7 @@ export default {
     data() {
         return {
             animals_delete_ids: [],
+            includeInReport: {},
         }
     },
     components: {
@@ -66,6 +73,9 @@ export default {
         'change-block': ChangeBlock,
     },
     methods:{
+        setActiveMissingAnimal(){
+            this.$store.dispatch('setActiveMissingAnimal', this.includeInReport);
+        },
         deleteRecordsAnimal(){
 
             this.$store.dispatch('deleteRecords',

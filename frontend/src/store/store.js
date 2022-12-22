@@ -15,12 +15,18 @@ export const store = new Vuex.Store({
     success_message: "",
     error_message: "",
 
+    active_missing_animal: {},
+
     animals: [],
     animal_types: [],
     
     api_path: "http://127.0.0.1:8000",
   },
   getters: {
+
+    getActiveMissingAnimal(state){
+      return state.active_missing_animal;
+    },
 
     getApiPath(state) {
       return state.api_path;
@@ -52,6 +58,10 @@ export const store = new Vuex.Store({
 
   },
   mutations: {
+
+    changeActiveMissingAnimal(state,active_missing_animal){
+      state.active_missing_animal = active_missing_animal;
+    },
 
     changeAnimal(state,change_animal) {
       state.animals.map(animal => animal.id == change_animal.id ? animal : change_animal)
@@ -136,7 +146,9 @@ export const store = new Vuex.Store({
   },
   actions: {
 
-  
+    setActiveMissingAnimal(context,active_missing_animal) {
+      context.commit('changeActiveMissingAnimal',active_missing_animal)
+    },
 
     clearMessage(context) {
       context.commit('clearMessage')
