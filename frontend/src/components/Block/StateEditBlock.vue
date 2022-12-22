@@ -18,9 +18,7 @@ export default {
         },
     },
     methods: {
-        changeEditState(edit_state) {
-            this.$store.dispatch('changeEditState', edit_state);
-        }
+     
 
     },
 

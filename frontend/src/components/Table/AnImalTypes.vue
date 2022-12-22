@@ -15,7 +15,7 @@
                         <th scope="col">№ п/п</th>
                         <th scope="col">Тип</th>
                         <th scope="col"> 
-                             <button :disabled="!editState" v-on:click="deleteRecordsAnimalType()" type="button" class="btn btn-danger">Удалить</button>
+                             <button :disabled="isChangeLoadingStateTrue" v-on:click="deleteRecordsAnimalType()" type="button" class="btn btn-danger">Удалить</button>
                          </th>
 
                     </tr>
@@ -29,7 +29,7 @@
                         <td>{{ data.name_type }} </td>
                         <td>
                             <div class="form-check">
-                                <input :value="data.id" v-model="animal_types_delete_ids" :disabled=!editState
+                                <input :value="data.id" v-model="animal_types_delete_ids" :disabled=isChangeLoadingStateTrue
                                     class="form-check-input" type="checkbox" :id="'deleteAnimalTypeCheck' + data.id">
                                 <label class="form-check-label" for="defaultCheck1">
                                     Удалить
@@ -69,8 +69,8 @@ export default {
         animal_types() {
             return this.$store.getters.getAnimalTypes;
         },
-        editState() {
-            return this.$store.getters.getStateEdit;
+        isChangeLoadingStateTrue() {
+            return this.$store.getters.changes_loading;
         },
 
 

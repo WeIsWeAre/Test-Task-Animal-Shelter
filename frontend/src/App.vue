@@ -2,7 +2,7 @@
   <div id="app">
 
     <changes-loader v-if=chagesLoadingState ></changes-loader>
-    <edit-block></edit-block>
+ 
     <main-header></main-header>
     <router-view></router-view>
 
@@ -12,14 +12,14 @@
 <script>
 
   import MainHeader from './components/MainHeader.vue'
-  import StateEditBlock from './components/Block/StateEditBlock.vue'
+
   import ChangesLoader from './components/ChangesLoader.vue'
 
   export default {
     name: 'App',
     components: {
       "main-header": MainHeader,
-      "edit-block" : StateEditBlock,
+      
       "changes-loader": ChangesLoader,
     },
     data() {
