@@ -5,10 +5,10 @@
                 <main-loader></main-loader>
             </div>
             <div v-else class="row">
-                <div class="col">
+                <div class="col-lg-4">
                    <animal-types></animal-types>
                 </div>
-                <div class="col">
+                <div class="col-lg-8">
                     <arrive-animals></arrive-animals>
                     
                 </div>

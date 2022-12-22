@@ -68,7 +68,7 @@
 
   .table-style>tbody>tr>td {
     word-break: break-all;
-    border-radius: 3px;
+    border-radius: 1px;
   }
 
   .bold {
@@ -76,6 +76,6 @@
   }
 
   button {
-    border-radius: 20px !important;
+    border-radius: 5px !important;
   }
 </style>

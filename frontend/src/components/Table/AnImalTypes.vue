@@ -9,7 +9,7 @@
 
             <h3 class="text-center mb-5"> Типы животных </h3>
 
-            <table class="table-responsive-md table table-dark table-style table-responsive-md">
+            <table class="table-responsive-md table table-primary table-bordered table-responsive-md">
                 <thead>
                     <tr>
                         <th scope="col">№ п/п</th>
@@ -58,7 +58,10 @@ export default {
     methods:{
         deleteRecordsAnimalType(){
 
-            this.$store.dispatch('deleteRecords',{"ids":this.animal_types_delete_ids,"path":'/api/animal_types/delete/',"name_mutation":'deleteAnimalType'});
+            this.$store.dispatch('deleteRecords',
+            {"ids":this.animal_types_delete_ids,
+            "path":'/api/animal_types/delete/',
+            "name_mutation":'deleteAnimalType'});
         }
     },
     computed: {

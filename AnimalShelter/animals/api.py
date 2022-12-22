@@ -5,14 +5,6 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.decorators import action
 
-class GetAnimals(APIView):
-
-    def get(self,request):
-
-        animals = Animal.objects.all()
-        serialazer = AnimalsListSerializer(animals,many = True)
-        return Response(serialazer.data)
-
 class GetAnimalTypes(APIView):
 
     def get(self,request):
@@ -20,6 +12,26 @@ class GetAnimalTypes(APIView):
         animal_types = AnimalType.objects.all()
         serialazer = AnimalTypesListSerializer(animal_types,many = True)
         return Response(serialazer.data)
+
+
+class AnimalsView(APIView):
+
+    def get(self,request):
+
+        animals = Animal.objects.all()
+        serialazer = AnimalsListSerializer(animals,many = True)
+        return Response(serialazer.data)
+
+    def post(self,request):
+        animal = AnimalCreateSerializer(data=request.data,context={'request': request})
+        
+        if animal.is_valid(raise_exception=True):
+                  
+            obj = animal.save()
+            return Response(obj.id,status=200)
+            
+        else:
+            return Response('Invalid create animal',status=400)
 
 #action(methods=["DELETE"], detail = False)
 class DeleteAnimal(APIView):

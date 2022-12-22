@@ -3,9 +3,8 @@ import AnimalTable from './views/AnimalTable.vue'
 
 
 export default new VueRouter({  
-    routes :
+routes :
 [  
- 
     {  
         path:'/animal_shelter',
         name:'animals',

@@ -59,6 +59,23 @@ export const store = new Vuex.Store({
   },
   mutations: {
 
+    changeAnimal(state,change_animal) {
+      
+      state.animals.forEach(animal => {
+        if(animal.id === change_animal.id){
+          animal.name_animal = change_animal.name_animal;
+          animal.animal_type = change_animal.animal_type;
+          animal.weight = change_animal.weight;
+        }
+      });
+      return state.animals;
+
+    },
+
+    addAnimal(state,add_animal) {
+      return state.animals.push(add_animal);
+    },
+
     deleteAnimalType (state, records_ids){
       
       records_ids.forEach(id => {
@@ -123,6 +140,15 @@ export const store = new Vuex.Store({
     changeEditState(context,edit_state) {
       context.commit('changeEditState',edit_state);
     },
+
+    clearMessage(context) {
+      context.commit('clearMessage')
+    },
+
+    updateError(context, text) {
+      context.commit('updateError', text)
+    },
+
     
     getDataFromServer(context){
 
@@ -138,7 +164,7 @@ export const store = new Vuex.Store({
            
             })
             .catch(error => {
-              context.commit('updateError',"Произошла серверная ошибка " + error.response.data.errors);
+              context.commit('updateError',"Произошла серверная ошибка " + error.response.data);
               context.commit('updateLoading',false);
   
             }) 
@@ -146,29 +172,21 @@ export const store = new Vuex.Store({
       context.commit('updateLoading',true);
 
        axios.get(context.getters.getApiPath + '/api/animals/')
-            .then(response => {
-              
-              context.commit('updateAnimalsData',response.data);
+        .then(response => {
+          
+          context.commit('updateAnimalsData',response.data);
 
-              context.commit('updateLoading',false);
-              context.commit('updateError',"");
-              
-              context.commit('combineDataFromServer')
+          context.commit('updateLoading',false);
+          context.commit('updateError',"");
+          
+          context.commit('combineDataFromServer')
 
-            })
-            .catch(error => {
-              context.commit('updateError',"Произошла серверная ошибка " + error.response.data.errors);
-              context.commit('updateLoading',false);
-  
-            }) 
-    },
+        })
+        .catch(error => {
+          context.commit('updateError',"Произошла серверная ошибка " + error.response.data);
+          context.commit('updateLoading',false);
 
-    clearMessage(context) {
-      context.commit('clearMessage')
-    },
-
-    updateError(context, text) {
-      context.commit('updateError', text)
+        }) 
     },
 
     deleteRecords(context,data){
@@ -181,11 +199,32 @@ export const store = new Vuex.Store({
         context.commit('updateError',"");
       })
       .catch(error => {
-        context.commit('updateError',"Произошла серверная ошибка " + error.response.data.errors);
+        context.commit('updateError',"Произошла серверная ошибка " + error.response.data);
         context.commit('updateChangesLoading',false);
 
       }) 
     },
+
+    createRecord(context,data){
+
+      context.commit('updateChangesLoading',true);
+       axios.post(context.getters.getApiPath + data.create_parameters.path,data.data_create)
+      .then((response) => {  
+      
+        let tmp = data.data_create;
+        tmp.id = response.data;
+
+        context.commit(data.create_parameters.name_mutation, tmp)
+        context.commit('updateChangesLoading',false);
+        context.commit('updateError',"");
+      })
+      .catch(error => {
+        context.commit('updateError',"Произошла серверная ошибка " + error.response.data);
+        context.commit('updateChangesLoading',false);
+
+      }) 
+    },
+  
     
 
   }

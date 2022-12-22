@@ -2,21 +2,23 @@
 
     <div>
 
+        <h3 class="text-center mb-3"> Поступившие животные </h3>
+        <create-animal-block></create-animal-block>
+
         <div class="text-center" v-if="animals.length == 0">
             <h5> Список поступивших животных пуст</h5>
         </div>
-        <div v-else>
+        <div class="arrived-animals-container" v-else>
 
-            <h3 class="text-center mb-5"> Поступившие животные </h3>
-
-            <table class="table-responsive-md table table-dark table-style table-responsive-md">
+            <table class="table-responsive-md table table-primary table-bordered table-responsive-md">
                 <thead>
                     <tr>
                         <th scope="col">№ п/п</th>
                         <th scope="col">Наименование</th>
                         <th scope="col">Тип животного</th>
                         <th scope="col">Вес</th>
-                        <th scope="col"> <button :disabled="!editState" v-on:click="deleteRecordsAnimal()" type="button" class="btn btn-danger">Удалить</button>
+                        <th scope="col">Изменение записи</th>
+                        <th scope="col"> <button :disabled="!editState && isChangeLoadingStateTrue" v-on:click="deleteRecordsAnimal()" type="button" class="btn btn-danger">Удалить</button>
                         </th>
 
                     </tr>
@@ -30,13 +32,14 @@
                         <td>{{ data.name }} </td>
                         <td>{{ data.name_type }} </td>
                         <td>{{ data.weight }} </td>
-                        <div class="form-check">
+                        <td> <change-block :animal_change="data"></change-block> </td>
+                        <td><div class="form-check">
                             <input :value="data.id" v-model="animals_delete_ids" :disabled=!editState
                                 class="form-check-input" type="checkbox" :id="'deleteAnimalCheck' + data.id">
                             <label class="form-check-label" for="defaultCheck1">
                                 Удалить
                             </label>
-                        </div>
+                        </div></td>
                     </tr>
                 </tbody>
             </table>
@@ -49,21 +52,33 @@
 </template>
 
 <script>
+import CreateAnimalBlock from "../Block/CreateAnimalBlock.vue"
+import ChangeBlock from "../Block/ChangeBlock.vue"
+
 export default {
     data() {
         return {
             animals_delete_ids: [],
-
         }
+    },
+    components: {
+        'create-animal-block': CreateAnimalBlock,
+        'change-block': ChangeBlock,
     },
     methods:{
         deleteRecordsAnimal(){
 
-            this.$store.dispatch('deleteRecords',{"ids":this.animals_delete_ids,"path":'/api/animals/delete/',"name_mutation":'deleteAnimals'});
+            this.$store.dispatch('deleteRecords',
+            {"ids":this.animals_delete_ids,
+            "path":'/api/animals/delete/',
+            "name_mutation":'deleteAnimals'
+        });
         }
     },
     computed: {
-
+        isChangeLoadingStateTrue() {
+            return this.$store.getters.changes_loading;
+        },
         animals() {
             return this.$store.getters.getAnimals;
         },
@@ -76,3 +91,12 @@ export default {
 }
 
 </script>
+
+<style>
+.arrived-animals-container{
+    
+    overflow-y: scroll;
+    height: 350px;
+}
+
+</style>
