@@ -19,7 +19,7 @@
                 <input required v-model="weight" type="number" class="form-control" id="FormControlInputTypeAnimalWeight">
             </div>
             <div class="col-auto mt-lg-3">
-                <button type="submit" class="btn btn-primary">Добавить</button>
+                <button :disabled="isChangeLoadingStateTrue" type="submit" class="btn btn-primary">Добавить</button>
             </div>
         </form>
         </div>
@@ -56,6 +56,9 @@ export default {
     computed: {
     animal_types() {
         return this.$store.getters.getAnimalTypes;
+    },
+    isChangeLoadingStateTrue() {
+        return this.$store.getters.changes_loading;
     },
 
 

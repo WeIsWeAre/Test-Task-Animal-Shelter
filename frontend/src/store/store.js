@@ -79,6 +79,8 @@ export const store = new Vuex.Store({
     },
 
     addAnimal(state,add_animal) {
+      add_animal.name_type_id = add_animal.name_type;
+      add_animal.name_type = state.animal_types.find(animal_type => animal_type.id == add_animal.name_type).name_type
       state.animals.push(add_animal);
     },
 
@@ -87,6 +89,12 @@ export const store = new Vuex.Store({
       records_ids.forEach(id => {
         state.animal_types = state.animal_types.filter(animal_type => animal_type.id !== id)
       });
+
+      state.animals.forEach(animal => {
+     
+        if(animal.name_type_id == records_ids)
+        { animal.name_type_id = "";}})
+
 
     },
 

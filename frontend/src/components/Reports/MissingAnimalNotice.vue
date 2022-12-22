@@ -7,10 +7,10 @@
       <p class=" text-center title-missing-animal-notice">ПРОПАЛО ЖИВОТНОЕ {{ getActiveMissingAnimal.name }}</p>
       
       <div class="d-flex flex-wrap justify-content-left align-items-center">
-         <div class="p-5">
+         <div class="px-4">
             <img class="img_missing_animal" src="../../assets/temp_photo.jpg">
          </div>
-         <div class="p-5 animal-signs-list">        
+         <div class="px-4 animal-signs-list">        
             <div class="d-flex">
                кличка : <div class="line"></div> 
             </div>
@@ -39,10 +39,13 @@
          </div>
       </div>
    
-      <div class="row">
+      <div class="d-flex">
          <div class="footer-missing-animal-notice">КОНТАКТНЫЕ ДАННЫЕ и информация о вознаграждении:  </div><div class="footer-underline"></div> 
       </div>
 
+      <button v-if="isVisible" type="button"
+           class="btn btn-primary mt-3" v-on:click="Print()">ПЕЧАТЬ
+         </button>
 
       </b-modal>
       
@@ -54,6 +57,11 @@
 
 <script>
    export default {
+      data(){
+         return {
+            isVisible: true,
+        }
+      },
       computed: {
          getActiveMissingAnimal() {
             return this.$store.getters.getActiveMissingAnimal;
@@ -61,7 +69,17 @@
          },
 
 
-        },  
+        },
+        methods:{
+         Print(){
+            this.isVisible = false;
+            setTimeout(()=> {
+               
+               window.print();
+               this.isVisible = true;
+            }, 1000);
+         }
+        }  
    }
    
 
@@ -70,7 +88,7 @@
 <style>
 .footer-underline{
    border-bottom: 1px solid rgb(22, 24, 35);
-  width: 500px;
+  width: 300px;
 }
 .line{
   border-bottom: 1px solid rgb(22, 24, 35);
@@ -93,7 +111,7 @@
    width: auto;
 }
 .title-missing-animal-notice{
-   font-size: 65px;
+   font-size: 40px;
    font-weight: bold;
 }
 </style>
