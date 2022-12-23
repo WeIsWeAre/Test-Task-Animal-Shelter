@@ -18,7 +18,8 @@ class AnimalImportExcelView(APIView):
         
         ids = []
         imported_data = Dataset().load(new_animal.read(),format='xlsx')
-  
+
+        # + add validate
         for data in imported_data:
            
             obj = Animal.objects.create(name = data[0],weight = data[1])
