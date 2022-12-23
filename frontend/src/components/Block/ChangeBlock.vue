@@ -50,7 +50,7 @@ export default {
         },
         changeAnimal(){
             this.$store.dispatch('changeRecord', 
-            { 
+            {
                 'data_change': {
                     'id': this.animal_change.id,
                     'name': this.change_name_animal,

@@ -13,6 +13,18 @@ class AnimalTypeView(APIView):
         serialazer = AnimalTypesListSerializer(animal_types,many = True)
         return Response(serialazer.data)
 
+    def post(self,request):
+        animal_type = AnimalTypeCreateSerializer(data=request.data,context={'request': request})
+        
+        if animal_type.is_valid(raise_exception=True):
+                  
+            obj = animal_type.save()
+            return Response(obj.id,status=200)
+            
+        else:
+            return Response('Invalid create animal type',status=400)
+    
+
 class AnimalsView(APIView):
 
     def get(self,request):

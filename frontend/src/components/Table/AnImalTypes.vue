@@ -1,13 +1,14 @@
 <template>
 
     <div>
+        
+        <h3 class="text-center mb-3"> Типы животных </h3>
+        <create-report-type-block></create-report-type-block>
 
         <div class="text-center" v-if="animal_types.length == 0">
             <h5> Список типов животных пуст</h5>
         </div>
         <div v-else>
-
-            <h3 class="text-center mb-5"> Типы животных </h3>
 
             <table class="table-responsive-md table table-primary table-bordered table-responsive-md">
                 <thead>
@@ -29,7 +30,7 @@
                         <td>{{ data.name_type }} </td>
                         <td>
                             <div class="form-check">
-                                <input :value="data.id" v-model="animal_types_delete_ids" :disabled=isChangeLoadingStateTrue
+                                <input :value="data.id" v-model="animal_types_delete_ids" :disabled="isChangeLoadingStateTrue"
                                     class="form-check-input" type="checkbox" :id="'deleteAnimalTypeCheck' + data.id">
                                 <label class="form-check-label" for="defaultCheck1">
                                     Удалить
@@ -48,12 +49,18 @@
 </template>
 
 <script>
+
+import CreateReportTypeBlock from "../Block/CreateReportTypeBlock.vue"
+
 export default {
     data() {
         return {
             animal_types_delete_ids: [],
 
         }
+    },
+    components: {
+      "create-report-type-block": CreateReportTypeBlock,
     },
     methods:{
         deleteRecordsAnimalType(){
@@ -70,7 +77,7 @@ export default {
             return this.$store.getters.getAnimalTypes;
         },
         isChangeLoadingStateTrue() {
-            return this.$store.getters.changes_loading;
+            return this.$store.getters.getChangesLoading;
         },
 
 

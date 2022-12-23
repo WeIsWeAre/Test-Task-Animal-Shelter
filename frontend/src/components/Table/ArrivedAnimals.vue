@@ -21,7 +21,6 @@
                         <th scope="col">Изменение записи</th>
                         <th scope="col" > <button :disabled="isChangeLoadingStateTrue" v-on:click="deleteRecordsAnimal()" type="button" class="btn btn-danger">Удалить</button>
                         </th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +39,7 @@
                        </td>
                         <td> <change-block :animal_change="data"></change-block> </td>
                         <td><div class="form-check">
-                            <input :value="data.id" v-model="animals_delete_ids" :disabled=isChangeLoadingStateTrue
+                            <input :value="data.id" v-model="animals_delete_ids" :disabled="isChangeLoadingStateTrue"
                                 class="form-check-input" type="checkbox" :id="'deleteAnimalCheck' + data.id">
                             <label class="form-check-label" for="defaultCheck1">
                                 Удалить
@@ -77,7 +76,7 @@ export default {
             this.$store.dispatch('setActiveMissingAnimal', this.includeInReport);
         },
         deleteRecordsAnimal(){
-
+            this.$store.dispatch('setActiveMissingAnimal', "");
             this.$store.dispatch('deleteRecords',
             {"ids":this.animals_delete_ids,
             "path":'/api/animals/delete/',
@@ -87,7 +86,7 @@ export default {
     },
     computed: {
         isChangeLoadingStateTrue() {
-            return this.$store.getters.changes_loading;
+            return this.$store.getters.getChangesLoading;
         },
         animals() {
             return this.$store.getters.getAnimals;

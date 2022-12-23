@@ -58,7 +58,7 @@ export default {
         return this.$store.getters.getAnimalTypes;
     },
     isChangeLoadingStateTrue() {
-        return this.$store.getters.changes_loading;
+        return this.$store.getters.getChangesLoading;
     },
 
 

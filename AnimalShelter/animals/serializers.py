@@ -23,6 +23,12 @@ class AnimalCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Animal
         fields = '__all__'
+
+class AnimalTypeCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AnimalType
+        fields = '__all__'
 class AnimalChangeSerializer(serializers.ModelSerializer):
 
     class Meta:

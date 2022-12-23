@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
   state: {
 
     loading: false,
-    changes_loading: false,
+    changes_loading: true,
 
     success_message: "",
     error_message: "",
@@ -82,6 +82,9 @@ export const store = new Vuex.Store({
       add_animal.name_type_id = add_animal.name_type;
       add_animal.name_type = state.animal_types.find(animal_type => animal_type.id == add_animal.name_type).name_type
       state.animals.push(add_animal);
+    },
+    addAnimalType(state,add_animal_type) {
+      state.animal_types.push(add_animal_type);
     },
 
     deleteAnimalType (state, records_ids){
