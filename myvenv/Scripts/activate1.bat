@@ -35,4 +35,5 @@ if defined _OLD_CODEPAGE (
 
 cd ..\..\
 cd frontend
+npm install
 npm run serve
