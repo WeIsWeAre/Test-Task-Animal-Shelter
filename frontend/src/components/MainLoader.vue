@@ -3,7 +3,7 @@
      <div  class="text-center">
 
         <div class="spinner-border" role="status">
-            <span class="visually-hidden"> Ожидайте</span>
+            <span class="visually-hidden"> </span>
         </div>
 
     </div>

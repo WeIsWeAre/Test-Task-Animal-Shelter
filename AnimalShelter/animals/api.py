@@ -4,6 +4,32 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from .resources import AnimalResource
+from tablib import Dataset
+
+class AnimalImportExcelView(APIView):
+
+    def post(self,request):
+
+        new_animal = request.FILES['excel_file']
+
+        if not new_animal.name.endswith("xlsx"):
+            return Response('Wrong format',status=400)
+        
+        ids = []
+        imported_data = Dataset().load(new_animal.read(),format='xlsx')
+  
+        for data in imported_data:
+           
+            obj = Animal.objects.create(name = data[0],weight = data[1])
+            ids.append(obj.id)
+
+        animals = Animal.objects.filter(id__in=ids)
+        serialazer = AnimalsListSerializer(animals,many = True)
+
+        return Response(serialazer.data,status=200)
+        
+       
 
 class AnimalTypeView(APIView):
 

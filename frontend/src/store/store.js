@@ -87,6 +87,11 @@ export const store = new Vuex.Store({
       state.animal_types.push(add_animal_type);
     },
 
+    addAnimalsList(state,animals_list) {
+      state.animals = state.animals.concat(animals_list);
+    },
+
+
     deleteAnimalType (state, records_ids){
       
       records_ids.forEach(id => {
@@ -241,7 +246,7 @@ export const store = new Vuex.Store({
         context.commit('updateError',"");
       })
       .catch(error => {
-        context.commit('updateError',"Произошла ошибка " + error.response.data);
+        context.commit('updateError',"Произошла ошибка " + error.response);
         context.commit('updateChangesLoading',false);
 
       }) 
@@ -259,7 +264,28 @@ export const store = new Vuex.Store({
         context.commit('updateError',"");
       })
       .catch(error => {
-        context.commit('updateError',"Произошла ошибка " + error.response.data);
+        context.commit('updateError',"Произошла ошибка " + error.response);
+        context.commit('updateChangesLoading',false);
+
+      }) 
+    },
+
+    ImportFromExcel(context,fd){
+
+      context.commit('updateChangesLoading',true);
+       axios.post(context.getters.getApiPath + "/api/animals/import_excel/",fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((response) => {  
+
+        context.commit('addAnimalsList',response.data);
+        context.commit('updateChangesLoading',false);
+        context.commit('updateError',"");
+      })
+      .catch(error => {
+        context.commit('updateError',"Произошла ошибка " + error.response);
         context.commit('updateChangesLoading',false);
 
       }) 

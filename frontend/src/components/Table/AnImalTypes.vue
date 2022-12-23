@@ -31,7 +31,7 @@
                         <td>
                             <div class="form-check">
                                 <input :value="data.id" v-model="animal_types_delete_ids" :disabled="isChangeLoadingStateTrue"
-                                    class="form-check-input" type="checkbox" :id="'deleteAnimalTypeCheck' + data.id">
+                                    class="form-check-input checkbox-2x" type="checkbox" :id="'deleteAnimalTypeCheck' + data.id">
                                 <label class="form-check-label" for="defaultCheck1">
                                     Удалить
                                 </label>

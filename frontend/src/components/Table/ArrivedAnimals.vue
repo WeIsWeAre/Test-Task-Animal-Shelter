@@ -18,7 +18,7 @@
             <table class="table-responsive-md table table-primary table-bordered table-responsive-md">
                 <thead>
                     <tr>
-                        <th scope="col">№ п/п</th>
+                        <th scope="col">кол-во {{ animals.length }}<br> № п/п</th>
                         <th scope="col">Наименование</th>
                         <th scope="col">Тип животного</th>
                         <th scope="col">Вес</th>
@@ -43,13 +43,16 @@
                             <b-form-radio :change="setActiveMissingAnimal()" v-model="includeInReport" :name="'includeInReport'+data.id" :value=data>Включить</b-form-radio> 
                        </td>
                         <td> <change-block :animal_change="data"></change-block> </td>
-                        <td><div class="form-check">
+                        <td>
+
+
+                            <div class="form-check">
                             <input :value="data.id" v-model="animals_delete_ids" :disabled="isChangeLoadingStateTrue"
-                                class="form-check-input" type="checkbox" :id="'deleteAnimalCheck' + data.id">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Удалить
-                            </label>
-                        </div></td>
+                                class="form-check-input checkbox-2x" type="checkbox" :id="'deleteAnimalCheck' + data.id">
+
+                            <label class="form-check-label" for="defaultCheck1">Удалить</label>
+                            </div>
+                    </td>
                     </tr>
                 </tbody>
             </table>

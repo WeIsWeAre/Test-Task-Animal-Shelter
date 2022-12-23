@@ -78,6 +78,11 @@
     font-weight: 900;
   }
 
+  .checkbox-2x {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+}
+
   button {
     border-radius: 5px !important;
   }

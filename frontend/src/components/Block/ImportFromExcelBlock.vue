@@ -2,12 +2,12 @@
     <div class="excel-import-block mb-3">
         <div class="d-flex flex-wrap justify-content-center align-items-end mb-3 mt-2">
         
-            <div class="mr-3" col-auto>Загрузка поступивших животных из файла {{ file1 ? file1.name : '' }}
-                <b-form-file v-model="excel_file" :state="Boolean(file1)" placeholder="Выберите файл..."
+            <div class="mr-3" col-auto>Загрузка поступивших животных из файла {{ excel_file ? excel_file.name : '' }}
+                <b-form-file v-model="excel_file" :state="Boolean(excel_file)" placeholder="Выберите файл..."
                 drop-placeholder="Поместите файл..."></b-form-file>
             </div>
       
-            <div col-auto><b-button variant="outline-primary mt-2">Загрузить</b-button></div>
+            <div col-auto><b-button v-on:click="ImportFromExcel()" variant="outline-primary mt-2">Загрузить</b-button></div>
 
         </div>
     </div>
@@ -22,8 +22,12 @@ export default {
 
         }
     },
-    computed: {
-
+    methods: {
+        ImportFromExcel()
+        {   let fd = new FormData();
+            fd.append("excel_file", this.excel_file);
+            this.$store.dispatch('ImportFromExcel',fd)
+        }
     },
 
 }
