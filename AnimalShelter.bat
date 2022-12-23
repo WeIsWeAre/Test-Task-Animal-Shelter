@@ -6,6 +6,7 @@ if %var%==N (
 set /P var="Do you have a node.js? Y/N "
 if %var%==N (
  start node-v18.12.1-x64.msi
+ pause
 )
 start http://localhost:8080/animal_shelter
 cd myvenv/Scripts
