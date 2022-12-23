@@ -3,7 +3,12 @@
     <div>
 
         <h3 class="text-center mb-3"> Поступившие животные </h3>
+
+        <import-from-excel-block></import-from-excel-block>
+        
         <create-animal-block></create-animal-block>
+
+       
 
         <div class="text-center" v-if="animals.length == 0">
             <h5> Список поступивших животных пуст</h5>
@@ -59,6 +64,7 @@
 <script>
 import CreateAnimalBlock from "../Block/CreateAnimalBlock.vue"
 import ChangeBlock from "../Block/ChangeBlock.vue"
+import ImportFromExcelBlock from '../Block/ImportFromExcelBlock.vue'
 
 export default {
     data() {
@@ -70,6 +76,7 @@ export default {
     components: {
         'create-animal-block': CreateAnimalBlock,
         'change-block': ChangeBlock,
+        "import-from-excel-block": ImportFromExcelBlock,
     },
     methods:{
         setActiveMissingAnimal(){

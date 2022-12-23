@@ -2,8 +2,9 @@
 
     <div class="text-center changes-loader">
 
-        <div style="width: 5rem; height: 5rem;" class="spinner-border text-warning" role="status"> </div>
-        <div class="loader-text">Загрузка...</div>
+        <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Ожидайте...</span>
+    </div>
 
    </div>
 

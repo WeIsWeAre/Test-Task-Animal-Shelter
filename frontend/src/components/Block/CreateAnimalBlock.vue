@@ -3,25 +3,27 @@
     <div class="text-center mb-3 create-animal-block">
 
         <div class="container mb-3 mt-2">
-        <form action="#" @submit.prevent="createaAnimal()" class="row align-items-end">
-            <div class="col-auto">
+         
+        <form class="d-flex flex-wrap align-items-end justify-content-center" form="buttonCreateAnimal"  action="#" @submit.prevent="createaAnimal()">
+            <div class="mr-auto">
                 <label for="FormControlInputNameAnimal"  class="form-label">Наименование</label>
                 <input required v-model="name_animal" type="text" class="form-control" maxlength="25" id="FormControlInputNameAnimal" placeholder="Наименование">
             </div>
-            <div class="col-auto">
+            <div class="mr-auto">
                 <label for="FormControlInputTypeAnimal" class="form-label">Тип животного</label>
-                <select v-model="animal_type" class="form-select" aria-label="Default select example" id="FormControlInputTypeAnimal">
+                <select v-model="animal_type" class="form-control" aria-label="Default select example" id="FormControlInputTypeAnimal">
                     <option v-for="animal_type in animal_types" v-bind:key="animal_type.id" :value="animal_type.id">{{animal_type.name_type}}</option>
                 </select>
             </div>
-            <div class="col-auto">
+            <div class="mr-auto">
                 <label for="FormControlInputTypeAnimalWeight" class="form-label">Вес</label>
                 <input required v-model="weight" type="number" class="form-control" id="FormControlInputTypeAnimalWeight">
             </div>
-            <div class="col-auto mt-lg-3">
-                <button :disabled="isChangeLoadingStateTrue" type="submit" class="btn btn-primary">Добавить</button>
+            <div class="mt-lg-3 mr-auto">
+                <button id="buttonCreateAnimal" :disabled="isChangeLoadingStateTrue" type="submit" class="btn btn-primary">Добавить</button>
             </div>
         </form>
+ 
         </div>
     </div>
 

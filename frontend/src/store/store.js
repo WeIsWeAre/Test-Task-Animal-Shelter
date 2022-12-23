@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
   state: {
 
     loading: false,
-    changes_loading: true,
+    changes_loading: false,
 
     success_message: "",
     error_message: "",
@@ -64,7 +64,7 @@ export const store = new Vuex.Store({
     },
 
     changeAnimal(state,change_animal) {
-      state.animals.map(animal => animal.id == change_animal.id ? animal : change_animal)
+      //state.animals.map(animal => animal.id == change_animal.id ? animal : change_animal)
 
       state.animals.forEach(animal => {
      
@@ -72,8 +72,8 @@ export const store = new Vuex.Store({
             animal.id = change_animal.id;
             animal.name = change_animal.name;
             animal.name_type = change_animal.name_type_not_id;
-            animal.weight = change_animal.weight;
-       
+            animal.weight = change_animal.weight;    
+            animal.name_type_id = change_animal.name_type;
           }
       });
     },
@@ -93,10 +93,12 @@ export const store = new Vuex.Store({
         state.animal_types = state.animal_types.filter(animal_type => animal_type.id !== id)
       });
 
+
       state.animals.forEach(animal => {
-     
-        if(animal.name_type_id == records_ids)
-        { animal.name_type_id = "";}})
+
+        if(records_ids.includes(animal.name_type_id))
+        { animal.name_type = "";
+        animal.name_type_id = "";}})
 
 
     },

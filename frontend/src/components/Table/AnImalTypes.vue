@@ -50,7 +50,7 @@
 
 <script>
 
-import CreateReportTypeBlock from "../Block/CreateReportTypeBlock.vue"
+import CreateAnimalTypeBlock from "../Block/CreateAnimalTypeBlock.vue"
 
 export default {
     data() {
@@ -60,7 +60,7 @@ export default {
         }
     },
     components: {
-      "create-report-type-block": CreateReportTypeBlock,
+      "create-report-type-block": CreateAnimalTypeBlock,
     },
     methods:{
         deleteRecordsAnimalType(){

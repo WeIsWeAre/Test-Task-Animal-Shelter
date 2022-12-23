@@ -3,6 +3,7 @@
 
     <changes-loader v-if=chagesLoadingState ></changes-loader>
     
+ 
     <create-report-block></create-report-block>
     <main-header></main-header>
     <router-view></router-view>
@@ -15,6 +16,7 @@
   import MainHeader from './components/MainHeader.vue'
   import CreateReportBlock from './components/Block/CreateReportBlock.vue'
   import ChangesLoader from './components/ChangesLoader.vue'
+
 
   export default {
     name: 'App',
